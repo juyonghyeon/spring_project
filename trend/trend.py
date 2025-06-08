@@ -21,9 +21,9 @@ if not os.path.isdir(path):
 
 # 원격 컨텐츠 로드 
 url = sys.argv[2] if len(sys.argv) == 3 and sys.argv[2] else "https://news.naver.com/"
-html = requests.get(url).text 
-soup = bs(html, 'html.parser') 
-body = soup.select_one("body") 
+html = requests.get(url).text
+soup = bs(html, 'html.parser')
+body = soup.select_one("body")
 text = body.get_text().strip().replace("\n", " ")
 stopwords = ['본문', '바로가기', 'NAVER', '검색', '이슈', '닫기', '구독'] # 불용어
 
@@ -39,7 +39,8 @@ for word, pos in okt.pos(text):
 stat = Counter(words).most_common(50)
 
 # 워드 클라우드 이미지 생성
-wc = WordCloud(font_path=f'{os.path.dirname(os.path.realpath(__file__))}/NanumGothic-ExtraBold.ttf', 
+image_file = strftime("%Y%m%d%H%M") + "_news.jpg"
+wc = WordCloud(font_path='C:/trend/NanumGothic-ExtraBold.ttf', 
                background_color='white', 
                max_font_size=100, 
                width=500, height=300)

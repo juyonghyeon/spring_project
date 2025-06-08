@@ -34,9 +34,11 @@ public class TrendCrawlingService {
     private final TrendRepository repository;
     private final TrendUrlRepository urlRepository;
 
+
     private final ObjectMapper om;
 
     public TrendCrawling process(String search){
+
 
         boolean isProduction = Arrays.stream(ctx.getEnvironment().getActiveProfiles()).anyMatch(s -> s.equals("prod"));
 

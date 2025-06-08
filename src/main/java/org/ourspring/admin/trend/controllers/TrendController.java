@@ -53,6 +53,10 @@ public class TrendController extends CommonController {
         return "admin/trend/etc";
     }
 
+
+
+
+
     /**
      * 공통 처리
      *
@@ -77,5 +81,6 @@ public class TrendController extends CommonController {
         model.addAttribute("addScript", addScript);
         model.addAttribute("pageTitle", pageTitle);
     }
+
 
 }

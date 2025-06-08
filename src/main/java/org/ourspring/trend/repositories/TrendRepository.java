@@ -15,7 +15,7 @@ public interface TrendRepository extends ListCrudRepository<Trend, Long> {
     Optional<Trend> getLatest(@Param("category") String category);
 
     @Query("SELECT * FROM TREND WHERE category=:category AND createdAt BETWEEN :sDate AND :eDate ORDER BY createdAt DESC LIMIT 1")
-    Optional<Trend> getDate(@Param("category") String category, @Param("sDate") LocalDateTime sDate, @Param("eDate") LocalDateTime eDate);
+    Optional<Trend> get(@Param("category") String category, @Param("sDate") LocalDateTime sDate, @Param("eDate") LocalDateTime eDate);
 
     @Query("SELECT * FROM TREND WHERE category=:category AND createdAt BETWEEN :sDate AND :eDate ORDER BY createdAt DESC")
     List<Trend> getPeriodTrend(@Param("category") String category, @Param("sDate") LocalDateTime sDate, @Param("eDate") LocalDateTime eDate);
