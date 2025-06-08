@@ -26,7 +26,7 @@
         <div th:if="${item != null}" th:object="${item}">
             <h2>일주일간의 누적 트렌드</h2>
 
-            <img th:src="*{wordCloud}" alt="일주일간의 워드 클라우드">
+            <img th:src="*{oneWeekWordCloud}" alt="일주일간의 워드 클라우드">
             <div class="chart-wrap">
                 <canvas id="lineChart1"></canvas>
             </div>
@@ -34,7 +34,7 @@
 
         <div th:if="${item != null}" th:object="${item}">
             <h2>한달간의 누적 트렌드</h2>
-            <img th:src="*{wordCloud}">
+            <img th:src="*{oneMonthWordCloud}">
             <div class="chart-wrap">
                 <canvas id="lineChart2"></canvas>
             </div>
@@ -44,10 +44,3 @@
     </section>
 </body>
 </html>
-
-<-- 커밋 시켜주세요 제발 -->
-<-- 커밋 시켜주세요 제발 -->
-<-- 커밋 시켜주세요 제발 -->
-<-- 커밋 시켜주세요 제발 -->
-<-- 커밋 시켜주세요 제발 -->
-<-- 커밋 시켜주세요 제발 -->
