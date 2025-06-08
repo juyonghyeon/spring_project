@@ -7,37 +7,40 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </th:block>
 
-<section layout:fragment="content">
-    <h1>오늘의 트렌드</h1>
-    <form name="frmSearch" method="get" th:object="${trendSearch}" autocomplete="off">
-        사이트 주소 :
-        <input type="text" name="siteUrl" th:field="*{siteUrl}">
-        <button type="submit">조회하기</button>
-    </form>
+<body>
+    <section layout:fragment="content">
+        <h1>오늘의 트렌드</h1>
+        <form name="frmSearch" method="get" th:object="${trendUrl}" autocomplete="off">
+            사이트 주소 :
+            <input type="text" name="siteUrl" th:field="*{siteUrl}">
+            <button type="submit">조회하기</button>
+        </form>
 
-    <div th:if="${item != null}" th:object="${item}">
-        <img th:src="*{wordCloud}" alt="오늘의 트렌드">
-        <div class="chart-wrap">
-            <canvas id="myChart"></canvas>
+        <div th:if="${item != null}" th:object="${item}">
+            <img th:src="*{wordCloud}" alt="오늘의 트렌드">
+            <div class="chart-wrap">
+                <canvas id="myChart"></canvas>
+            </div>
         </div>
-    </div>
 
-    <div th:if="${item != null}" th:object="${item}">
-        <h2>일주일간의 누적 트렌드</h2>
-        <img th:src="*{wordCloud}" alt="일주일간의 워드 클라우드">
-        <div class="chart-wrap">
-            <canvas id="lineChart1"></canvas>
+        <div th:if="${item != null}" th:object="${item}">
+            <h2>일주일간의 누적 트렌드</h2>
+
+            <img th:src="*{wordCloud}" alt="일주일간의 워드 클라우드">
+            <div class="chart-wrap">
+                <canvas id="lineChart1"></canvas>
+            </div>
         </div>
-    </div>
 
-    <div th:if="${item != null}" th:object="${item}">
-        <h2>한달간의 누적 트렌드</h2>
-        <img th:src="*{wordCloud}">
-        <div class="chart-wrap">
-            <canvas id="lineChart2"></canvas>
+        <div th:if="${item != null}" th:object="${item}">
+            <h2>한달간의 누적 트렌드</h2>
+            <img th:src="*{wordCloud}">
+            <div class="chart-wrap">
+                <canvas id="lineChart2"></canvas>
+            </div>
         </div>
-    </div>
 
-    <script type="application/json" id="chart-data" th:utext="*{keywords}"></script>
-</section>
+        <script type="application/json" id="chart-data" th:utext="*{keywords}"></script>
+    </section>
+</body>
 </html>
