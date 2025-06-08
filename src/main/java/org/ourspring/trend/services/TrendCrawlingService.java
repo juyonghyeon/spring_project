@@ -110,7 +110,7 @@ public class TrendCrawlingService {
             ProcessBuilder builder = isProduction ? new ProcessBuilder("/bin/sh", activationCommand) : new ProcessBuilder(activationCommand); // 가상환경 활성화
             Process process = builder.start();
             if (process.waitFor() == 0) { // 정상 수행된 경우
-                builder = new ProcessBuilder(pythonPath, properties.getTrend() + "/generate_wordcloud.py", filePath, json);
+                builder = new ProcessBuilder(pythonPath, properties.getTrend() + "/generate_wordcloud.py/", filePath, json);
                 process = builder.start();
                 int statusCode = process.waitFor();
                 if (statusCode == 0) {

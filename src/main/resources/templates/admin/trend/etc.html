@@ -22,7 +22,7 @@
 
     <th:block th:unless="${json == null}">
         <h2>현재 트렌드</h2>
-        <img th:src="${wordCloud}" alt="오늘 워드클라우드" style="max-width: 50%; height: auto;">
+        <img th:src="${now.wordCloud}" alt="오늘 워드클라우드" style="max-width: 50%; height: auto;">
 
         <div class="chart-wrap">
             <canvas id="now-chart"></canvas>
@@ -31,12 +31,17 @@
         <h2>일주일간의 누적 트렌드</h2>
         <img th:src="${oneWeekWordCloud}" alt="일주일 워드클라우드" style="max-width: 50%; height: auto;">
 
-        <canvas id="week-chart"></canvas>
+        <div class="chart-wrap">
+            <canvas id="week-chart"></canvas>
+        </div>
+
 
         <h2>한달간의 누적 트렌드</h2>
         <img th:src="${oneMonthWordCloud}" alt="한달 워드클라우드" style="max-width: 50%; height: auto;">
 
-        <canvas id="month-chart"></canvas>
+        <div class="chart-wrap">
+            <canvas id="month-chart"></canvas>
+        </div>
 
         <script type="application/json" id="chart-data" th:utext="${json}"></script>
     </th:block>

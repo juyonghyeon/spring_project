@@ -29,4 +29,16 @@
 - / etc.html 작성, 꺽은선 그래프 작성, 입력받은 url이랑 데이터 가져오는 기능 연결
 - 특정 범위 데이터 워드클라우드로 변경 (첨부터 있는 데이터를 워드클라우드로 or 조회하기 누르면 이전 7일 데이터 싹다 생성및 워드클라우드로)
 
-## 
+- 기존에 접근 할려했던 내용
+LocalDateTime start = search.getSDate().atStartOfDay();
+LocalDateTime end = search.getEDate().atTime(23, 59, 59);
+List<Trend> data = repository.getPeriodTrend(category, start, end);
+
+## 워드 클라우드 이미지 생성
+image_file = strftime("%Y%m%d%H%M") + "_total.jpg"
+wc = WordCloud(font_path='C:/trend/NanumGothic-ExtraBold.ttf',
+background_color='white',
+max_font_size=100,
+width=500, height=300)
+cloud = wc.generate_from_text(text)
+cloud.to_file(f"{path}/{image_file}")

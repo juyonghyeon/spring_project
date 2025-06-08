@@ -57,9 +57,6 @@ public class TrendInfoService {
      * @return
      */
     public List<Trend> getList(String category, CommonSearch search) {
-//        LocalDateTime start = search.getSDate().atStartOfDay();
-//        LocalDateTime end = search.getEDate().atTime(23, 59, 59);
-//        List<Trend> data = repository.getPeriodTrend(category, start, end);
 
         LocalDate start = Objects.requireNonNullElse(search.getSDate(), LocalDate.now());
         LocalDate end = Objects.requireNonNullElse(search.getEDate(), LocalDate.now());
