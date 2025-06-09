@@ -6,7 +6,7 @@ const chartLib = {
         const {now, oneWeek, oneMonth } = JSON.parse(el.innerHTML);
 
         // 현재 트렌드는 파이 그래프로 처리
-        this.drawPieGraph(now.keywords, 'now-chart');
+        this.drawPieGraph(now.keywords, "now-chart");
 
         // 일주일간 누적 트렌드 라인 그래프로 처리
         this.drawLineGraph(oneWeek, "week-chart");
