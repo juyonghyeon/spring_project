@@ -16,6 +16,11 @@
 - 중요한 코드가 있으면 코드와 함께 설명
 - 구현화면에 대한 이미지
 
+- 기존 접근 내용
+  LocalDateTime start = search.getSDate().atStartOfDay();
+  LocalDateTime end = search.getEDate().atTime(23, 59, 59);
+  List<Trend> data = repository.getPeriodTrend(category, start, end);
+
 
 ## 06 / 07
 - 각자의 환경 구성
@@ -31,12 +36,3 @@
 LocalDateTime start = search.getSDate().atStartOfDay();
 LocalDateTime end = search.getEDate().atTime(23, 59, 59);
 List<Trend> data = repository.getPeriodTrend(category, start, end);
-
-## 워드 클라우드 이미지 생성
-image_file = strftime("%Y%m%d%H%M") + "_total.jpg"
-wc = WordCloud(font_path='C:/trend/NanumGothic-ExtraBold.ttf',
-background_color='white',
-max_font_size=100,
-width=500, height=300)
-cloud = wc.generate_from_text(text)
-cloud.to_file(f"{path}/{image_file}")

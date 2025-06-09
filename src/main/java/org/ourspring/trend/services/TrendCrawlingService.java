@@ -61,7 +61,6 @@ public class TrendCrawlingService {
                 int statusCode = process.waitFor();
                 if (statusCode == 0) {
                     String json = process.inputReader().lines().collect(Collectors.joining());
-                    System.out.println(json);
                     TrendCrawling item = om.readValue(json, TrendCrawling.class);
 
                     try {
