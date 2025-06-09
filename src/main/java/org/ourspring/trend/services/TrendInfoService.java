@@ -128,7 +128,7 @@ public class TrendInfoService {
                     int c = count.getOrDefault(key, 0) + 1;
                     total.put(key, t); // 합계
                     count.put(key, c); // 일별 통계 카운트
-                    avg.put(key, (int)Math.round(t / (double)c)); // 합계
+                    avg.put(key, (int)Math.round(t / (double)c)); // 평균
                 });
             } catch (JsonProcessingException e) {}
 

@@ -61,7 +61,6 @@ public class TrendCrawlingService {
                 int statusCode = process.waitFor();
                 if (statusCode == 0) {
                     String json = process.inputReader().lines().collect(Collectors.joining());
-                    System.out.println(json);
                     TrendCrawling item = om.readValue(json, TrendCrawling.class);
 
                     try {
@@ -106,8 +105,8 @@ public class TrendCrawlingService {
         }
 
         try {
-            String fileName = String.format("wc%d.jpg", Math.abs(Objects.hash(json)));
-            String filePath = fileProperties.getPath() + "/trend/total";
+            String fileName = String.format("%d_total.jpg", Math.abs(Objects.hash(json)));
+            String filePath = fileProperties.getPath() + "/trend/" + fileName;
             ProcessBuilder builder = isProduction ? new ProcessBuilder("/bin/sh", activationCommand) : new ProcessBuilder(activationCommand); // 가상환경 활성화
             Process process = builder.start();
             if (process.waitFor() == 0) { // 정상 수행된 경우
@@ -116,6 +115,9 @@ public class TrendCrawlingService {
                 int statusCode = process.waitFor();
                 if (statusCode == 0) {
                     return fileProperties.getUrl() + "/trend/" + fileName;
+                } else {
+                    System.out.println("statusCode:" + statusCode);
+                    process.errorReader().lines().forEach(System.out::println);
                 }
             }
         } catch(Exception e) {
