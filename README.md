@@ -85,16 +85,16 @@
 
 ## TrendCrawlingService
 - TrendCrawling process
-- 주어진 search URL에 대해 크롤링을 실행하고, 결과 데이터를 JSON으로 받아 DB에 저장
-  - trend.py 실행하여 해당 URL의 텍스트 수집 및 분석
-  - TrendCrawling 객체로 결과 매핑
-  - 결과를 Trend 엔티티로 변환하여 DB 저장
+    - 주어진 search URL에 대해 크롤링을 실행하고, 결과 데이터를 JSON으로 받아 DB에 저장
+      - trend.py 실행하여 해당 URL의 텍스트 수집 및 분석
+      - TrendCrawling 객체로 결과 매핑
+      - 결과를 Trend 엔티티로 변환하여 DB 저장
   
 - String createWordCloud
-- 키워드 JSON 문자열을 받아 Python 스크립트를 실행하여 워드클라우드 이미지를 생성
-  - JSON 해시값 기반으로 이미지 파일명 생성
-  - word.py Python 스크립트 실행
-  - trend/total 디렉토리에 이미지 저장
+    - 키워드 JSON 문자열을 받아 Python 스크립트를 실행하여 워드클라우드 이미지를 생성
+      - JSON 해시값 기반으로 이미지 파일명 생성
+      - word.py Python 스크립트 실행
+      - trend/total 디렉토리에 이미지 저장
 
 ## TrendInfoService
 - Trend getLatest
