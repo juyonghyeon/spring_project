@@ -3,6 +3,9 @@ package org.ourspring.global.search;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.List;
+import java.util.stream.IntStream;
+
 @Getter
 @ToString
 public class Pagination {
@@ -59,5 +62,16 @@ public class Pagination {
         this.nextRangePage = nextRangePage;
     }
 
+    // ?page=번호
+
+    /**
+     * String 배열의 0번째 - 페이지 번호, 1번째 - ? page=번호와 같은 쿼리스트링
+     * @return
+     */
+    public List<String[]> getPages() {
+
+        return total < 1 ? List.of() : IntStream.rangeClosed(firstRangePage, lastRangePage).mapToObj(i -> new String[] {""+i, "?page="+i}).toList();
+
+    }
 
 }
