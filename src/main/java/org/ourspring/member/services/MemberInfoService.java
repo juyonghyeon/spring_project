@@ -96,7 +96,7 @@ public class MemberInfoService implements UserDetailsService {
 
         // 권한 조건 검색 S
         List<Authority> authorities = search.getAuthority();
-        if (!authorities.isEmpty()) {
+        if (authorities !=null && !authorities.isEmpty()) {
 
 
             addWhere.add(" authority IN (" + Stream.generate(() -> "?").limit(authorities.size()).collect(Collectors.joining(",")) + ")");
