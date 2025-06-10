@@ -1,7 +1,9 @@
 package org.ourspring.member.services;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.ourspring.global.search.ListData;
+import org.ourspring.global.search.Pagination;
 import org.ourspring.member.MemberInfo;
 import org.ourspring.member.constants.Authority;
 import org.ourspring.member.controllers.MemberSearch;
@@ -32,6 +34,8 @@ public class MemberInfoService implements UserDetailsService {
 
     private final MemberRepository repository;
     private final JdbcTemplate jdbcTemplate;
+
+    private final HttpServletRequest request; // 쿼리스트링 값 유지를 위해
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -102,23 +106,32 @@ public class MemberInfoService implements UserDetailsService {
         }
         // 권한 조건 검색 E
 
-        params.add(offset);
-        params.add(limit);
 
         StringBuffer sb = new StringBuffer(2000);
+        StringBuffer sb2 = new StringBuffer(2000);
+
         sb.append("SELECT * FROM MEMBER");
+        sb2.append("SELECT COUNT(*) FROM MEMBER");
 
         if (!addWhere.isEmpty()) {
-            sb.append(" WHERE ");
-            sb.append(String.join(" AND ", addWhere));
+            String where = " WHERE " + String.join(" AND ", addWhere);
+            sb.append(where);
+            sb.append(where);
         }
 
         sb.append(" ORDER BY createdAt DESC");
         sb.append(" LIMIT ?, ?");
 
+        params.add(offset);
+        params.add(limit);
+
         List<Member> items = jdbcTemplate.query(sb.toString(), this::mapper, params.toArray());
 
-        return null;
+        int total = jdbcTemplate.queryForObject(sb2.toString(), int.class); // 검색 조건에 다른 전체 레코드 갯수
+
+        Pagination pagination = new Pagination(page, total, 10, 20, request);
+
+        return new ListData<>(items,pagination);
     }
 
     private Member mapper(ResultSet rs, int i) throws SQLException {

@@ -1,9 +1,13 @@
 package org.ourspring.global.search;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.ToString;
+import org.springframework.util.StringUtils;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Getter
@@ -19,6 +23,16 @@ public class Pagination {
     private int prevRangePage;
     private int nextRangePage;
     private int lastPage;
+    private String baseUrl;
+
+
+    public Pagination(int page, int total) {
+        this(page, total, 0, 0);
+    }
+
+    public Pagination(int page, int total, int range, int limit) {
+        this(page, total, range, limit, null);
+    }
 
     /**
      *
@@ -27,7 +41,7 @@ public class Pagination {
      * @param range : 페이지 구간
      * @param limit : 한 페이지당 보여줄 레코드 갯수
      */
-    public Pagination(int page, int total, int range, int limit) {
+    public Pagination(int page, int total, int range, int limit, HttpServletRequest request) {
         page = Math.max(page, 1);
         range = range < 1 ? 10 : range;
         limit = limit < 1 ? 20 : limit;
@@ -51,6 +65,19 @@ public class Pagination {
         int lastRangeNum = (totalPages - 1) / range; // 마지막 페이지 구간 번호
         int nextRangePage = rangeNum < lastRangeNum ? lastRangePage + 1 : 0;
 
+
+        // 쿼리스트링 처리 S
+        // ?page=10&post_id=freetalk&t=100&page=11....
+        String qs = request == null ? "" : request.getQueryString();
+        String baseUrl = "?";
+        if (StringUtils.hasText(qs)) {
+            baseUrl += Arrays.stream(qs.split("&"))
+                    .filter(s -> !s.contains("page="))
+                    .collect(Collectors.joining("&")) + "&";
+        }
+        baseUrl += "page=";
+        // 쿼리스트링 처리 E
+
         this.page = page;
         this.range = range;
         this.limit = limit;
@@ -60,18 +87,19 @@ public class Pagination {
         this.lastRangePage = lastRangePage;
         this.prevRangePage = prevRangePage;
         this.nextRangePage = nextRangePage;
+        this.baseUrl = baseUrl;
     }
 
     // ?page=번호
 
     /**
-     * String 배열의 0번째 - 페이지 번호, 1번째 - ? page=번호와 같은 쿼리스트링
+     * String 배열의 0번째 - 페이지 번호, 1번째 - ?page=번호와 같은 쿼리스트링
      * @return
      */
     public List<String[]> getPages() {
 
-        return total < 1 ? List.of() : IntStream.rangeClosed(firstRangePage, lastRangePage).mapToObj(i -> new String[] {""+i, "?page="+i}).toList();
-
+        return total < 1 ? List.of() : IntStream.rangeClosed(firstRangePage, lastRangePage)
+                .mapToObj(i -> new String[] {"" + i, baseUrl + i})
+                .toList();
     }
-
 }
