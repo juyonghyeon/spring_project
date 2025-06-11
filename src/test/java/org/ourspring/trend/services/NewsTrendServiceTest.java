@@ -14,6 +14,6 @@ public class NewsTrendServiceTest {
     void test() {
         //NewsTrend data = service.process();
         //System.out.println(data);
-        service.process("https://news.naver.com/");
+        //service.process("https://news.naver.com/");
     }
 }

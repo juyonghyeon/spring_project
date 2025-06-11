@@ -66,7 +66,6 @@ public class TrendInfoService {
     }
 
 
-
     // 트렌드 데이터 조회
     public Map<String, Object> getStat(String url) {
 
@@ -109,7 +108,7 @@ public class TrendInfoService {
         return statData;
     }
 
-    private  Map<LocalDate, Map<String, Integer>> preprocessing(List<Trend> trends) {
+    public Map<LocalDate, Map<String, Integer>> preprocessing(List<Trend> trends) {
         if (trends == null) return null;
 
         Map<LocalDate, Map<String, Integer>> itemsTotal = new HashMap<>();
@@ -129,7 +128,7 @@ public class TrendInfoService {
                     int c = count.getOrDefault(key, 0) + 1;
                     total.put(key, t); // 합계
                     count.put(key, c); // 일별 통계 카운트
-                    avg.put(key, (int)Math.round(t / (double)c)); // 합계
+                    avg.put(key, (int)Math.round(t / (double)c)); // 평균
                 });
             } catch (JsonProcessingException e) {}
 
@@ -155,12 +154,10 @@ public class TrendInfoService {
 
         try {
             String json = om.writeValueAsString(items);
-
             return crawlingService.createWordCloud(json);
 
         } catch (JsonProcessingException e) {}
 
         return null;
     }
-
 }
