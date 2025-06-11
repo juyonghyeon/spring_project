@@ -1,21 +1,25 @@
 package org.ourspring.member.controllers;
 
-import lombok.RequiredArgsConstructor;
-import org.ourspring.global.libs.Utils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
 
-    private final Utils utils;
-
     @GetMapping("/join")
     public String join(Model model) {
-        return utils.tpl("member/join");
+
+        model.addAttribute("addCss", List.of("member/style", "member/test"));
+        model.addAttribute("addScript", List.of("member/form", "member/test2"));
+
+        model.addAttribute("addCommonCss", List.of("test/common1", "test/common2"));
+        model.addAttribute("addCommonScript", List.of("fileManager"));
+
+        return "front/member/join";
     }
 }

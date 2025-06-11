@@ -2,27 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <meta charset="UTF-8">
-    <meta name="keywords" th:content="${@utils.keywords()}">
-    <meta name="dscription" th:content="${@utils.description()}">
-    <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css?v={v}(v=${@utils.version()})}">
-    <link rel="stylesheet" type="text/css" th:each="cssFile : ${addCommonCss}"
-          th:href="@{/common/css/{css}.css?v={v}(css=${cssFile}, v=${@utils.version()})}">
-    <th:block layout:fragment="addCommonCss"></th:block>
+    <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:each="cssFile : ${addCommonCss}" th:href="@{/common/css/{css}.css(css=${cssFile})}">
+    <th:block layout:fragment="addCommontCss"></th:block>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/front/css/style.css?v={v}(v=${@utils.version()})}">
+    <link rel="stylesheet" type="text/css" th:href="@{/front/css/style.css}">
     <link rel="stylesheet" type="text/css" th:each="cssFile : ${addCss}"
-          th:href="@{/front/css/{css}.css?v={v}(css=${cssFile}, v=${@utils.version()})}">
+          th:href="@{/front/css/{css}.css(css=${cssFile})}">
     <th:block layout:fragment="addCss"></th:block>
 
-    <script th:src="@{/common/js/common.js?v={v}(v=${@utils.version()})}"></script>
-    <script th:each="jsFile : ${addCommonScript}" th:src="@{/common/js/{js}.js?v={v}(js=${jsFile}, v=${@utils.version()})}"></script>
+
+    <script th:src="@{/common/js/common.js}"></script>
+    <script th:each="jsFile : ${addCommonScript}" th:src="@{/common/js/{js}.js(js=${jsFile})}"></script>
     <th:block layout:fragment="addCommonScript"></th:block>
 
-    <script th:src="@{/front/js/common.js?v={v}(v=${@utils.version()})}"></script>
-    <script th:each="jsFile : ${addScript}" th:src="@{/front/js/{js}.js?v={v}(js=${jsFile}, v=${@utils.version()})}"></script>
+    <script th:src="@{/front/js/common.js}"></script>
+    <script th:each="jsFile : ${addScript}" th:src="@{/front/js/{js}.js(js=${jsFile})}"></script>
     <th:block layout:fragment="addScript"></th:block>
-    <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
 </head>
 <body>
 <header th:replace="~{front/outlines/_header::common}"></header>
