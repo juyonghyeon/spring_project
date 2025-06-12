@@ -3,7 +3,11 @@ package org.ourspring.admin.product.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.ourspring.admin.global.controllers.CommonController;
+import org.ourspring.global.search.ListData;
 import org.ourspring.product.constants.ProductStatus;
+import org.ourspring.product.controllers.ProductSearch;
+import org.ourspring.product.entities.Product;
+import org.ourspring.product.services.ProductInfoService;
 import org.ourspring.product.services.ProductUpdateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +26,7 @@ import java.util.UUID;
 public class ProductController extends CommonController {
 
     private final ProductUpdateService updateService;
+    private final ProductInfoService infoService;
 
     @Override
     @ModelAttribute("mainCode")
@@ -41,8 +46,11 @@ public class ProductController extends CommonController {
 
     // 상품 목록
     @GetMapping({"", "/list"})
-    public String list(Model model) {
+    public String list(@ModelAttribute ProductSearch search, Model model) {
         commonProcess("list", model);
+        ListData<Product> data = infoService.getList(search);
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
 
         return "admin/product/list";
     }
@@ -103,7 +111,7 @@ public class ProductController extends CommonController {
             pageTitle = code.equals("update") ? "상품정보 수정" : "상품등록";
 
         } else if (code.equals("list")) {
-            pageTitle = "상품";
+            pageTitle = "상품 목록";
         }
 
         model.addAttribute("pageTitle", pageTitle);
