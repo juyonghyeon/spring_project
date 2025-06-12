@@ -17,7 +17,7 @@ import java.util.Objects;
 @Lazy
 @Service
 @RequiredArgsConstructor
-public class ProductManageService {
+public class   ProductManageService {
 
     private final HttpServletRequest request;
     private final ProductRepository repository;
