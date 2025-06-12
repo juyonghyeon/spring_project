@@ -4,13 +4,110 @@
       layout:decorate="~{admin/layouts/main}">
 
 <section layout:fragment="content">
-    <h1 th:text="${pageTitle}"></h1>
-    1. 상품 검색<br>
-    - 검색항목: 상품명, 카테고리, 상품상태<br>
-    - 각각 검색 조회(상품명, 카테고리), 통합 검색(상품명 + 카테고리)<br>
+    <h1>상품 검색</h1>
+    <form method="get" th:action="@{/admin/product/list}">
+        <table class="table-cols">
+            <tbody>
+            <!-- 상품명 선택 -->
+            <tr>
+                <th width="120">상품명</th>
+                <td>
+                    <select name="name">
+                        <option value="">상품명 선택</option>
+                        <option th:each="p : ${productNames}"
+                                th:value="${p}"
+                                th:text="${p}"
+                                th:selected="${param.name == p}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
 
-    2. 상품 목록<br>
-    - 상품각각을 선택 체크 박스 추가<br>
-    - 선택된 상품의 상품 상태 변경, 삭제 처리<br>
+            <!-- 카테고리 선택 -->
+            <tr>
+                <th>카테고리</th>
+                <td>
+                    <select name="category">
+                        <option value="">카테고리 선택</option>
+                        <option th:each="c : ${categoryList}"
+                                th:value="${c}"
+                                th:text="${c}"
+                                th:selected="${param.category == c}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+
+            <!-- 상품 상태 선택 -->
+            <tr>
+                <th>상품상태</th>
+                <td>
+                    <select name="status">
+                        <option value="">상품 상태 선택</option>
+                        <option th:each="s : ${statusList}"
+                                th:value="${s.name()}"
+                                th:text="${#messages.msg('productStatus.' + s.name())}"
+                                th:selected="${param.status == s.name()}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <!-- 키워드 검색 -->
+            <tr>
+                <th>키워드 검색</th>
+                <td class="flex">
+                    <select name="sopt" class="w180 mr5">
+                        <option value="ALL" th:selected="${param.sopt == 'ALL'}">상품 & 카테고리</option>
+                        <option value="PRODUCT" th:selected="${param.sopt == 'PRODUCT'}">상품</option>
+                        <option value="CATEGORY" th:selected="${param.sopt == 'CATEGORY'}">카테고리</option>
+                    </select>
+                    <input type="text" name="skey" th:value="${param.skey}" placeholder="검색어를 입력하세요.">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <button type="submit">검색</button>
+    </form>
+
+    <hr>
+
+    <h1>상품 목록</h1>
+    <form method="post" th:action="@{/admin/product/batch}">
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>상품명</th>
+                <th>카테고리</th>
+                <th>상태</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${items}">
+                <td><input type="checkbox" name="chk" th:value="${product.seq}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.category}"></td>
+                <td th:text="${#messages.msg('productStatus.' + product.status)}"></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(items)}">
+                <td colspan="4">상품이 없습니다.</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="flex mt-2">
+            <select name="changedStatus">
+                <option value="">상태변경</option>
+                <option th:each="s : ${statusList}"
+                        th:value="${s.name()}"
+                        th:text="${#messages.msg('productStatus.' + s.name())}">
+                </option>
+            </select>
+            <button type="submit" name="_method" value="patch">변경</button>
+            <button type="submit" name="_method" value="delete">삭제</button>
+        </div>
+    </form>
 </section>
+
 </html>
