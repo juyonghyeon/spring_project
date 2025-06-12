@@ -1,26 +1,61 @@
 package org.ourspring.admin.member.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.ourspring.admin.global.controllers.CommonController;
+import org.ourspring.global.search.ListData;
+import org.ourspring.member.constants.Authority;
+import org.ourspring.member.controllers.MemberSearch;
+import org.ourspring.member.entities.Member;
+import org.ourspring.member.services.MemberInfoService;
+import org.ourspring.member.services.MemberUpdateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
+@RequiredArgsConstructor
 @RequestMapping("/admin/member")
 @Controller("adminMemberController")
 public class MemberController extends CommonController {
 
+    private final MemberInfoService infoService;
+    private final MemberUpdateService updateService;
+
+    @ModelAttribute("authorities")
+    public Authority[] authorities() {
+        return Authority.values();
+    }
+
     @Override
+    @ModelAttribute("mainCode")
     public String mainCode() {
         return "member";
     }
 
     @GetMapping({"", "/list"})
-    public String list(Model model) {
+    public String list(@ModelAttribute MemberSearch search, Model model) {
         commonProcess("list", model);
 
+        ListData< Member> data = infoService.getList(search);
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
+
         return "admin/member/list";
+    }
+
+    @RequestMapping({"", "/list"})
+    public String listPs(@RequestParam(name="chk", required = false) List<Integer> chks, Model model) {
+
+        updateService.processBatch(chks);
+
+        // 처리 완료 후에는 부모창의 목록을 새로고침
+        model.addAttribute("script", "parent.location.reload();");
+        return "common/_execute_script";
     }
 
     /**
