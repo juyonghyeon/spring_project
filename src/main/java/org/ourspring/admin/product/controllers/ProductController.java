@@ -103,7 +103,7 @@ public class ProductController extends CommonController {
             pageTitle = code.equals("update") ? "상품정보 수정" : "상품등록";
 
         } else if (code.equals("list")) {
-            pageTitle = "상품";
+            pageTitle = "상품 목록";
         }
 
         model.addAttribute("pageTitle", pageTitle);
