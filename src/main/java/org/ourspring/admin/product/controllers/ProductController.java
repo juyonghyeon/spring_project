@@ -8,6 +8,7 @@ import org.ourspring.product.constants.ProductStatus;
 import org.ourspring.product.controllers.ProductSearch;
 import org.ourspring.product.entities.Product;
 import org.ourspring.product.services.ProductInfoService;
+import org.ourspring.product.services.ProductManageService;
 import org.ourspring.product.services.ProductUpdateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,7 @@ import java.util.UUID;
 @RequestMapping("/admin/product")
 public class ProductController extends CommonController {
 
+    private final ProductManageService manageService;
     private final ProductUpdateService updateService;
     private final ProductInfoService infoService;
 
@@ -54,6 +56,16 @@ public class ProductController extends CommonController {
 
         return "admin/product/list";
     }
+
+    // 등록 상품 상태 수정
+//    @RequestMapping({"", "/list"})
+//    public String listPs(@RequestParam(name="chk", required = false) List<Integer> chks, Model model) {
+//
+//        manageService.processBatch(chks);
+//        model.addAttribute("script", "parent.location.reload();");
+//        return "common/_execute_script";
+//
+//    }
 
     // 상품 등록
     @GetMapping("/register")

@@ -70,10 +70,8 @@
         <button type="submit" class="submit-btn">검색</button>
     </form>
 
-    <hr>
-
-    <h1>상품 목록</h1>
-    <form name="frmList" method="POST" th:action="@{/admin/product}" autocomplete="off" target="ifrmProcess">
+    <!-- 2. 상품 목록 + 상태 변경 -->
+    <form name="frmStatusUpdate" method="post" th:action="@{/admin/product}" autocomplete="off" target="ifrmProcess">
         <input type="hidden" name="_method" value="PATCH">
         <table class="table-rows">
             <thead>
@@ -81,9 +79,13 @@
                 <th width="40" align="center">
                     <input type="checkbox" class="check-all" id="check-all" data-target-name="chk">
                     <label for="check-all" class="standalone"></label>
+                </th>
                 <th>상품명</th>
-                <th>상품상태</th>
-                <th>상품삭제</th>
+                <th>카테고리</th>
+                <th>소비자가</th>
+                <th>판매가</th>
+                <th>설명</th>
+                <th>현재 상태</th>
             </tr>
             </thead>
             <tbody>
@@ -93,23 +95,30 @@
                     <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk-' + status.index}">
                     <label th:for="${'chk-' + status.index}" class="standalone"></label>
                 </td>
-                <td align="center">
-                    <th:block th:text="*{name}"></th:block>
-                    <div class='badge' th:text="*{#messages.msg('authority.' + authority)}"></div>
+                <td th:text="*{name}"></td>
+                <td th:text="*{category}"></td>
+                <td th:text="*{consumerPrice}"></td>
+                <td th:text="*{salePrice}"></td>
+                <td th:text="*{description}"></td>
+                <td>
+                    <select th:name="${'updateStatus_' + chk.index}" th:id="${'updateStatus_' + chk.index}">
+                        <option th:each="s : ${statusList}"
+                                th:value="${s.name()}"
+                                th:text="#{productStatus.${s.name()}}"
+                                th:selected="${product.status == s}">
+                        </option>
+                    </select>
                 </td>
-
-                <td th:text="*{#temporals.format(createdAt, 'yy.MM.dd HH:mm')}" align="center"></td>
             </tr>
             <tr th:unless="${items != null && !items.isEmpty()}">
-                <td colspan="7" class="no-data">
-                    조회된 상품이 없습니다.
-                </td>
+                <td colspan="7" class="no-data">조회된 상품이 없습니다.</td>
             </tr>
             </tbody>
         </table>
+
         <div class="table-action">
-            <button type="button" class="sbtn process-form delete" data-form-name="frmList">선택상품 변경하기</button>
-            <button type="button" class="sbtn black process-form edit" data-form-name="frmList">선택상품 삭제하기</button>
+            <button type="button" class="sbtn process-form delete" data-form-name="frmList">상품 삭제</button>
+            <button type="button" class="sbtn black process-form edit" data-form-name="frmList">상품 상태 수정하기</button>
         </div>
     </form>
 
