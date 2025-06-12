@@ -1,6 +1,5 @@
 package org.ourspring.product.services;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.ourspring.global.exceptions.script.AlertException;
 import org.ourspring.global.libs.Utils;
@@ -28,8 +27,6 @@ public class ProductManageService {
         if(method.equalsIgnoreCase("DELETE")){ // 탈퇴 회원 기능
          member.setDeletedAt(LocalDateTime.now());
         }
-
-
 
 
 
