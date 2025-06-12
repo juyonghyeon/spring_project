@@ -135,7 +135,7 @@ public class ProductController extends CommonController {
         }
 
     }
-
+//
 //        @DeleteMapping({"/delete/{seq}"})
 //        public String dp2(HttpSession session, ){
 //
