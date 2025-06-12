@@ -1,5 +1,6 @@
 package org.ourspring.admin.product.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.ourspring.admin.global.controllers.CommonController;
@@ -8,6 +9,7 @@ import org.ourspring.product.constants.ProductStatus;
 import org.ourspring.product.controllers.ProductSearch;
 import org.ourspring.product.entities.Product;
 import org.ourspring.product.services.ProductInfoService;
+import org.ourspring.product.services.ProductManageService;
 import org.ourspring.product.services.ProductUpdateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,6 +30,7 @@ public class ProductController extends CommonController {
 
     private final ProductUpdateService updateService;
     private final ProductInfoService infoService;
+    private final ProductManageService service;
 
     @Override
     @ModelAttribute("mainCode")
@@ -119,4 +123,24 @@ public class ProductController extends CommonController {
         model.addAttribute("addCommonScript", addCommonScript);
         model.addAttribute("addScript", addScript);
     }
+    @DeleteMapping({"/delete/{seq}"})
+    public String findById(HttpSession session, Errors errors){
+        Member member = (Member) session.getAttribute("mebmer");
+        if(member!= null){
+//            service.processBatch("member"); // 서비스쪽으로 넘길려고 엤는데
+            return "rediect:/main";
+        }else {
+            return "error";
+
+        }
+
+    }
+
+//        @DeleteMapping({"/delete/{seq}"})
+//        public String dp2(HttpSession session, ){
+//
+//        }
+
+
+
 }
