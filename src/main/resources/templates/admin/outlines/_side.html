@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <aside th:fragment="menus">
+
     <a th:href="@{/admin/config}" th:classappend="${mainCode == 'config'} ? 'on'">
         <i class="xi-cog"></i>
         사이트 설정
@@ -18,5 +19,9 @@
             상품관리
         </i>
     </a>
+    <div class="product-footer-penguin">
+        <img th:src="@{images/penguin.png}" class="img">
+        <img th:src="@{images/pinkbin.png}" class="img2">
+    </div>
 </aside>
 </html>

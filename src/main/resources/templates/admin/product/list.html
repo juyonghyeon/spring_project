@@ -82,8 +82,11 @@
                     <input type="checkbox" class="check-all" id="check-all" data-target-name="chk">
                     <label for="check-all" class="standalone"></label>
                 <th>상품명</th>
+                <th>카테고리</th>
                 <th>상품상태</th>
-                <th>상품삭제</th>
+                <th>가격</th>
+                <th>소비자 가격</th>
+                <th>상품 설명</th>
             </tr>
             </thead>
             <tbody>
@@ -95,10 +98,9 @@
                 </td>
                 <td align="center">
                     <th:block th:text="*{name}"></th:block>
-                    <div class='badge' th:text="*{#messages.msg('authority.' + authority)}"></div>
                 </td>
-
-                <td th:text="*{#temporals.format(createdAt, 'yy.MM.dd HH:mm')}" align="center"></td>
+                <td th:text="*{category}" align="center"></td>
+                <td th:text="*{status}" align="center"></td>
             </tr>
             <tr th:unless="${items != null && !items.isEmpty()}">
                 <td colspan="7" class="no-data">
