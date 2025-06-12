@@ -86,7 +86,7 @@ public class ProductInfoService {
         item.setGid(rs.getString("gid"));
         item.setName(rs.getString("name"));
         item.setCategory(rs.getString("category"));
-        item.setStatus(ProductStatus.valueOf("status")); // enum
+        item.setStatus(ProductStatus.valueOf(rs.getString("status"))); // enum
         item.setConsumerPrice(rs.getInt("consumerPrice"));
         item.setSalePrice(rs.getInt("salePrice"));
         item.setDescription(rs.getString("description"));
@@ -100,5 +100,4 @@ public class ProductInfoService {
         return item;
 
     }
-
 }
