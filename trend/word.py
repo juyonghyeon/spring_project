@@ -17,10 +17,9 @@ if not os.path.isdir(path):
 text = sys.argv[2]
 
 # 워드 클라우드 이미지 생성
-image_file = strftime("%Y%m%d%H%M") + "_total.jpg"
 wc = WordCloud(font_path='C:/trend/NanumGothic-ExtraBold.ttf', 
                background_color='white', 
                max_font_size=100, 
                width=500, height=300)
 cloud = wc.generate_from_text(text)
-cloud.to_file(f"{path}/{image_file}")
+cloud.to_file(f"{sys.argv[1]}")

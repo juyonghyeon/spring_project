@@ -22,7 +22,6 @@ import java.util.Map;
 public class TrendController extends CommonController {
 
     private final TrendInfoService infoService;
-
     @Override
     @ModelAttribute("mainCode")
     public String mainCode() {
