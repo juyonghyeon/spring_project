@@ -46,7 +46,7 @@ public class ProductInfoService {
             } else if (sopt.equalsIgnoreCase("CATEGORY")) {
                 addWhere.add("category LIKE ?");
             } else {
-                addWhere.add("CONCAT(name, category LIKE ?");
+                addWhere.add("CONCAT(name, category) LIKE ?");
             }
             params.add("%" + skey + "%");
         }

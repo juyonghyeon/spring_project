@@ -8,36 +8,6 @@
     <form method="get" th:action="@{/admin/product/list}">
         <table class="table-cols">
             <tbody>
-            <!-- 상품명 선택 -->
-            <tr>
-                <th width="120">상품명</th>
-                <td>
-                    <select name="name">
-                        <option value="">상품명 선택</option>
-                        <option th:each="p : ${productNames}"
-                                th:value="${p}"
-                                th:text="${p}"
-                                th:selected="${param.name == p}">
-                        </option>
-                    </select>
-                </td>
-            </tr>
-
-            <!-- 카테고리 선택 -->
-            <tr>
-                <th>카테고리</th>
-                <td>
-                    <select name="category">
-                        <option value="">카테고리 선택</option>
-                        <option th:each="c : ${categoryList}"
-                                th:value="${c}"
-                                th:text="${c}"
-                                th:selected="${param.category == c}">
-                        </option>
-                    </select>
-                </td>
-            </tr>
-
             <!-- 상품 상태 선택 -->
             <tr>
                 <th>상품상태</th>
@@ -81,7 +51,8 @@
                 <th width="40" align="center">
                     <input type="checkbox" class="check-all" id="check-all" data-target-name="chk">
                     <label for="check-all" class="standalone"></label>
-                <th>상품명</th>
+                </th>
+                <th align="center">상품명</th>
                 <th>카테고리</th>
                 <th>상품상태</th>
                 <th>가격</th>
@@ -101,6 +72,9 @@
                 </td>
                 <td th:text="*{category}" align="center"></td>
                 <td th:text="*{status}" align="center"></td>
+                <td th:text="*{salePrice}" align="center"></td>
+                <td th:text="*{consumerPrice}" align="center"></td>
+                <td th:text="*{description}" align="center"></td>
             </tr>
             <tr th:unless="${items != null && !items.isEmpty()}">
                 <td colspan="7" class="no-data">
