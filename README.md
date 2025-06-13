@@ -125,8 +125,18 @@
   - 전체 데이터를 기반으로 하나의 워드클라우드 이미지 생성
  
 ## ProductInfoService
+- getList 메서드를 정의
+  - 상품 페이지 기능 (page, limit, offset, total)
+  - 상품 검색 기능 (sopt, skey)
+- mapper 메서드를 정의
+  - 데이터 베이스에 저장된 상품을 item에 저장하여 return
+  - getList에 상품 객체를 넣어 줌(mapper)
 
 ## ProductManageService
+
+- processBatch 메서드를 정의
+  - 처리할 상품이 있을때 삭제처리 및 상태변경 처리 기능
+  - 기존 회원 관리에서 사용한 방법이지만 다른 방식을 시도하여 실제로 사용은 안함.
 
 ## admin/product/list.html
 
