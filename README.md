@@ -50,6 +50,8 @@
     - html, css 작업
   - 주용현
     - service 구현
+    - 등록된 상품 목록, 페이지 기능, 검색 기능 service 작성
+    - 상태 변경 기능 작성
   - 송근호
     - service 구현
 
@@ -112,6 +114,15 @@
   - 트렌드 목록을 날짜별 키워드 빈도 평균 형태로 변환
 - String getWordCloudPath
   - 전체 데이터를 기반으로 하나의 워드클라우드 이미지 생성
+ 
+## ProductInfoService
+
+## ProductManageService
+
+## admin/product/list.html
+
+## css
+
 
 # 6. 구현 화면
 
@@ -124,4 +135,5 @@
 ## 지난 30일간의 트렌드
 ![img_3.png](img_3.png)
 
+## 상품 목록 관리자 페이지
 ![img_4.png](img_4.png)
