@@ -125,6 +125,19 @@
 
 ## admin/product/list.html
 
+- HTML <form> 태그의 action 속성을 설정
+  - URL이 서버의 컨트롤러와 매핑되며, 프레임워크를 이용해 효율적으로 요청을 처리
+- statusList라는 리스트를 순회하며 <option> 태그를 반복적으로 생성
+  - 동적으로 리스트 데이터를 처리해, 코드 수정 없이도 상태 리스트를 손쉽게 업데이트 가능
+- 각 상태 객체의 name() 메서드에서 반환된 값을 <option> 태그의 value 속성으로 설정
+- 이전에 선택한 상태 값을 기준으로 <option> 태그에 selected 속성을 추가
+- th:if 및 th:unless
+  - "조회된 상품이 없습니다." 메시지를 표시
+- th:value, th:text, th:name
+  - th:value: 입력 요소의 값을 동적으로 설정
+  - th:text: 요소 내 텍스트 콘텐츠를 설정
+  - th:name: 입력 필드의 이름 속성을 동적으로 설정
+
 ## css
 
 
