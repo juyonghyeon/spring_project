@@ -125,7 +125,8 @@
 
 ## admin/product/list.html
 
-- HTML <form> 태그의 action 속성을 설정
+- HTML form 태그의 action 속성을 설정
+  
   - URL이 서버의 컨트롤러와 매핑되며, 프레임워크를 이용해 효율적으로 요청을 처리
 - statusList라는 리스트를 순회하며 <option> 태그를 반복적으로 생성
   - 동적으로 리스트 데이터를 처리해, 코드 수정 없이도 상태 리스트를 손쉽게 업데이트 가능
