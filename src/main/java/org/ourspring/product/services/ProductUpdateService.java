@@ -22,6 +22,9 @@ public class ProductUpdateService {
             // 상품 등록시에만 추가되는 정보
             item.setGid(form.getGid());
         }
+        if(mode.equals("edit")){
+
+        }
 
         // 공통 저장 정보
         item.setName(form.getName());
@@ -30,7 +33,6 @@ public class ProductUpdateService {
         item.setConsumerPrice(form.getConsumerPrice());
         item.setSalePrice(form.getSalePrice());
         item.setDescription(form.getDescription());
-
 
         repository.save(item);
 
