@@ -171,6 +171,10 @@ textarea:focus {
     width: 100%;
 }
 
+.table-cols th {
+    text-align: left;
+}
+
 .table-cols th,
 .table-rows thead th {
     background: #ffe0eb;
@@ -178,7 +182,6 @@ textarea:focus {
     color: #5a4a4a;
     font-weight: bold;
     font-size: 1.15rem;
-    text-align: left;
 }
 
 .table-cols td,
