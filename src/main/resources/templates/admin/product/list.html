@@ -62,14 +62,12 @@
             </thead>
             <tbody>
             <tr th:if="${items != null && !items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
-                <td>
+                <td align="center">
                     <input type="hidden" th:name="${'seq_' + status.index}" th:value="*{seq}">
                     <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk-' + status.index}">
                     <label th:for="${'chk-' + status.index}" class="standalone"></label>
                 </td>
-                <td align="center">
-                    <th:block th:text="*{name}"></th:block>
-                </td>
+                <td th:text="*{name}" align="center"></td>
                 <td th:text="*{category}" align="center"></td>
                 <td th:text="*{status}" align="center"></td>
                 <td th:text="*{salePrice}" align="center"></td>
